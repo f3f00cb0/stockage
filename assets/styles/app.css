@@ -1,0 +1,183 @@
+html, body {
+    background-color: #303030;
+    overflow: hidden;
+}
+.sidebar {
+    background-color: #141414;
+    border-color: #868686;
+    color: #868686;
+}
+.folderName {
+    position: absolute;
+    padding-top: 105px;
+}
+
+.modal-window {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.25);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+}
+
+.modal-window:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-window > div {
+    width: 530px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background: white;
+}
+
+.modal-window header {
+    font-weight: bold;
+}
+
+.modal-window h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+}
+
+.modal-close {
+    color: #aaa;
+    line-height: 50px;
+    font-size: 80%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 70px;
+    text-decoration: none;
+}
+
+.modal-close:hover {
+    color: black;
+}
+
+a {
+    color: inherit;
+}
+
+.modal-window > div {
+    border-radius: 1rem;
+}
+
+.modal-window div:not(:last-of-type) {
+    margin-bottom: 15px;
+}
+
+small {
+    color: lightgray;
+}
+
+.btn {
+    background-color: white;
+    padding: 1em 1.5em;
+    border-radius: 1rem;
+    text-decoration: none;
+}
+
+.btn i {
+    padding-right: 0.3em;
+}
+
+.dropzone-container {
+    margin-top: 2rem;
+}
+
+/* 6 */
+.custom-btn {
+    width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+}
+.btn-6 span {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.btn-6:before,
+.btn-6:after {
+    position: absolute;
+    content: "";
+    height: 0%;
+    width: 1px;
+    box-shadow:
+            -1px -1px 20px 0px rgba(255,255,255,1),
+            -4px -4px 5px 0px rgba(255,255,255,1),
+            7px 7px 20px 0px rgba(0,0,0,.4),
+            4px 4px 5px 0px rgba(0,0,0,.3);
+}
+.btn-6:before {
+    right: 0;
+    top: 0;
+    transition: all 500ms ease;
+}
+.btn-6:after {
+    left: 0;
+    bottom: 0;
+    transition: all 500ms ease;
+}
+.btn-6:hover{
+    background: transparent;
+    color: #76aef1;
+    box-shadow: none;
+}
+
+.btn-6 span:before,
+.btn-6 span:after {
+    position: absolute;
+    content: "";
+    box-shadow:
+            -1px -1px 20px 0px rgba(255,255,255,1),
+            -4px -4px 5px 0px rgba(255,255,255,1),
+            7px 7px 20px 0px rgba(0,0,0,.4),
+            4px 4px 5px 0px rgba(0,0,0,.3);
+}
+.btn-6 span:before {
+    left: 0;
+    top: 0;
+    width: 0%;
+    height: .5px;
+    transition: all 500ms ease;
+}
+.btn-6 span:after {
+    right: 0;
+    bottom: 0;
+    width: 0%;
+    height: .5px;
+    transition: all 500ms ease;
+}
+
+@media screen and (max-width: 580px) {
+    .modal-window > div {
+        width: 400px;
+    }
+}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon espace de stockage{% endblock %}
+
+{% block body %}
+<style>
+    .m-5 {
+        margin: 1.2rem;
+    }
+</style>
+{% include 'includes/menu.html.twig' %}
+    <div class="absolute top-16 bottom-0 md:left-48 overflow-y-auto">
+        <!-- content -->
+        <div class="flex-1 p-10 text-2xl font-bold">
+
+            <section class="container mx-auto flex flex-wrap justify-center items-start">
+
+                <div class="flex flex-wrap">
+                    {% for doc in userdocs %}
+                        <div class="item h-36 w-36 m-5">
+                            {% if doc.extension == 'jpg' or doc.extension == 'webp' or doc.extension == 'png'  %}
+                                <img src="/{{ app.user.username }}/{{ doc.folder.name }}/{{ doc.name }}"/>
+                            {% elseif doc.extension == 'mp4' %}
+                                <video src="/{{ app.user.username }}/{{ doc.folder.name }}/{{ doc.name }}"></video>
+                            {% else %}
+                                <a href="/{{ app.user.username }}/{{ doc.folder.name }}/{{ doc.name }}" download>{{ doc.name }}</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+{% endblock %}

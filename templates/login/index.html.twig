@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+    <style>
+        input {
+            font-size: 25px;
+            font-weight: bold;
+            height: 100px;
+        }
+
+        input[type="password"] {
+            -webkit-text-security: disc;
+        }
+
+        input::placeholder {
+            color: black;
+            font-size: 1.2em !important;
+        }
+
+        html {
+            overflow: hidden;
+        }
+
+        .space-y-4 div ul li {
+            color: red;
+        }
+    </style>
+    <div id="accountCreationForm" class="min-h-screen bg-purple-400 flex justify-center items-center">
+        <div class="absolute w-60 h-60 rounded-xl bg-purple-300 -top-5 -left130 z-0 transform rotate-45 hidden md:block"></div>
+        <div class="absolute w-48 h-48 rounded-xl bg-purple-300 -bottom-6 -right130 transform rotate-12 hidden md:block"></div>
+        <div class="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
+            <div>
+                <h1 class="text-3xl font-bold text-center mb-4 cursor-pointer">Se connecter</h1>
+                <p class="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">Créer
+                    un compte pour accéder à votre espace de stockage !</p>
+            </div>
+            <form action="{{ path('login') }}" method="post">
+                <div class="space-y-4">
+
+                    <div>
+                        <input class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" type="text"
+                               id="username" name="_username" placeholder="Nom d'utilisateur"
+                               value="{{ last_username }}"/>
+                    </div>
+                    <div>
+                        <input class="block text-sm py-3 px-4 rounded-lg w-full border outline-none" type="password"
+                               id="password" placeholder="Mot de passe" name="_password"/>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </div>
+                <div class="text-center mt-6">
+                    <button type="submit" class="py-3 w-64 text-xl text-white bg-purple-400 rounded-2xl">Se connecter
+                    </button>
+                    <p class="mt-4 text-sm">Vous n'avez pas de compte? <a href="/" class="underline  cursor-pointer">
+                            S'insrire</a></p>
+                </div>
+            </form>
+        </div>
+        <div class="w-40 h-40 absolute bg-purple-300 rounded-full top16 right-12 hidden md:block"></div>
+        <div class="w-20 h-40 absolute bg-purple-300 rounded-full bottom16 left-10 transform rotate-45 hidden md:block"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre dossier{% endblock %}
+
+{% block body %}
+    {% include 'includes/menu.html.twig' %}
+    <style>
+        .btn-6 {
+            background: rgb(247,150,192);
+            background: radial-gradient(circle, rgba(247,150,192,1) 0%, rgba(118,174,241,1) 100%);
+            line-height: 42px;
+            padding: 0;
+            border: none;
+            margin-top: 2rem;
+        }
+    </style>
+
+    <div class="absolute top-16 bottom-0 md:left-48 overflow-y-auto">
+        <!-- content -->
+        <div class="flex-1 p-10 text-2xl font-bold">
+
+            <section class="container mx-auto flex flex-wrap justify-center items-start">
+
+                <div class="flex flex-wrap">
+                    {% for doc in userdocs %}
+                        <div class="item h-36 w-36 m-5">
+                            {% if doc.extension == 'jpg' or doc.extension == 'webp' or doc.extension == 'png'  %}
+                                <img src="/{{ app.user.username }}/{{ folderName }}/{{ doc.name }}"/>
+                            {% elseif doc.extension == 'mp4' %}
+                                <video src="/{{ app.user.username }}/{{ folderName }}/{{ doc.name }}"></video>
+                            {% else %}
+                                <a href="/{{ app.user.username }}/{{ folderName }}/{{ doc.name }}" download>{{ doc.name }}</a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="item mt-16">
+
+                        <a class="btn" id="openModalAddDocs" href="#">👋 Ajouter un document</a>
+
+                        <div id="open-modal-add" class="modal-window">
+                            <div>
+                                <a href="#" title="Close" id="close-modal" class="modal-close">Fermer</a>
+                                <h1>Votre nouveau fichier!</h1>
+                                {{ form_start(formdocs) }}
+                                {{ form_row(formdocs.name) }}
+                                <input type="submit" class="custom-btn btn-6" name="submit" value="Envoyer"/>
+                                {{ form_end(formdocs) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+    <script>
+        const btnClose = document.getElementById('close-modal');
+        const modale = document.getElementById('open-modal-add');
+        document.getElementById('openModalAddDocs').addEventListener('click', function(){
+            modale.style.opacity = 100;
+            modale.style.visibility = 'visible';
+            modale.style.pointerEvents = 'all';
+        })
+        btnClose.addEventListener("click", function(){
+            modale.style.visibility = 'hidden';
+        });
+    </script>
+    {% if error %}
+        {% if error == 1%}
+            <div id="open-modal" class="modal-window">
+                <div>
+                    <a href="#" title="Close" id="close-modal-error" class="modal-close">Fermer</a>
+                    <h2>Fichier déjà présent dans le dossier</h2>
+                </div>
+            </div>
+            <script>
+                const modal = document.getElementById('open-modal');
+                const btnCloseError = document.getElementById('close-modal-error');
+                modal.style.opacity = 100;
+                modal.style.visibility = 'visible';
+                modal.style.pointerEvents = 'all';
+                btnCloseError.addEventListener("click", function(){
+                    modal.style.visibility = 'hidden';
+                });
+            </script>
+        {% endif %}
+    {% endif %}
+{% endblock %}
