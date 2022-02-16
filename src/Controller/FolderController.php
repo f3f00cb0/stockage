@@ -20,8 +20,11 @@ class FolderController extends AbstractController
      */
     public function index($name, Request $request, DocumentRepository $documentRepository, FolderRepository $folderRepository, EntityManagerInterface $entityManager): Response
     {
+        if($this->getUser() == null){
+            return $this->redirectToRoute('homepage');
+        }
         $username = $this->getUser()->getUserIdentifier();
-        $folder = $folderRepository->findOneByName($name);
+        $folder = $folderRepository->findOneByName($name, $this->getUser()->getId());
         //get all files of folder and store files uploaded in the folder
         $folderFiles = [];
         $docs = new Document();

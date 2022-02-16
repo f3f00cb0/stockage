@@ -36,11 +36,13 @@ class FolderRepository extends ServiceEntityRepository
 
 
 
-    public function findOneByName($value): ?Folder
+    public function findOneByName($value, $user): ?Folder
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.name = :val')
+            ->andWhere('f.user = :user')
             ->setParameter('val', $value)
+            ->setParameter('user', $user)
             ->getQuery()
             ->getOneOrNullResult()
         ;

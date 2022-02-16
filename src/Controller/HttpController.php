@@ -68,6 +68,9 @@ class HttpController extends AbstractController
      */
     public function login(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, FolderRepository $folderRepository): Response
     {
+        if($this->getUser() == null){
+            return $this->redirectToRoute('homepage');
+        }
         $user = $this->token->getToken()->getUser();
         $userId = $user->getId();
         $userClass = $userRepository->loadUserById($userId);
@@ -111,6 +114,9 @@ class HttpController extends AbstractController
      */
     public function seeDocuments(DocumentRepository $documentRepository, FolderRepository $folderRepository): Response
     {
+        if($this->getUser() == null){
+            return $this->redirectToRoute('homepage');
+        }
         $user = $this->token->getToken()->getUser();
         $userFolders = $folderRepository->findBy([
             'user' => $user->getId()
